@@ -1,0 +1,38 @@
+{
+  "name": "berrytrip",
+  "version": "1.0.0",
+  "description": "Plataforma segura para mujeres que viajan solas",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "firebase": "^10.7.0",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.294.0",
+    "next": "^14.0.0",
+    "postcss": "^8.4.32",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.47.0",
+    "react-hot-toast": "^2.4.1",
+    "react-leaflet": "^4.2.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "tailwindcss": "^3.3.6",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.8",
+    "@types/node": "^20.8.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "eslint": "^8.52.0",
+    "eslint-config-next": "^14.0.0",
+    "typescript": "^5.2.0"
+  }
+}

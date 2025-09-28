@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BerryTrip - Viajes Seguros para Mujeres</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-route text-2xl"></i>
+                    <h1 class="text-2xl font-bold">BerryTrip</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#inicio" class="hover:text-pink-200 transition-colors">Inicio</a>
+                    <a href="#mapa" class="hover:text-pink-200 transition-colors">Mapa</a>
+                    <a href="#reservas" class="hover:text-pink-200 transition-colors">Reservas</a>
+                    <a href="#chat" class="hover:text-pink-200 transition-colors">Chat</a>
+                </nav>
+                <button id="authBtn" class="bg-white text-pink-600 px-4 py-2 rounded-lg font-semibold hover:bg-pink-50 transition-colors">
+                    Iniciar Sesión
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="bg-gradient-to-br from-pink-50 to-purple-50 py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-5xl font-bold text-gray-800 mb-6">
+                Viaja Segura, Viaja Libre
+            </h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                La plataforma de viajes diseñada exclusivamente para mujeres. Conecta con otras viajeras, 
+                encuentra alojamientos verificados y mantente segura en cada destino.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-pink-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-pink-600 transition-colors">
+                    Comenzar Ahora
+                </button>
+                <button class="border-2 border-pink-500 text-pink-500 px-8 py-3 rounded-lg font-semibold hover:bg-pink-50 transition-colors">
+                    Ver Demo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="mapa" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+                Mapa de Seguridad
+            </h2>
+            <div class="bg-gray-100 rounded-lg p-6">
+                <div id="map" class="w-full h-96 rounded-lg"></div>
+                <div class="mt-4 text-center">
+                    <p class="text-gray-600">Tu ubicación actual y usuarios cercanos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="reservas" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+                Alojamientos Verificados en Seoul
+            </h2>
+            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                Descubre los mejores alojamientos en Seoul, todos verificados y seguros para mujeres viajeras.
+            </p>
+            
+            <!-- Search and Filters -->
+            <div class="bg-white rounded-lg p-6 mb-8 shadow-sm">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <input type="text" id="searchInput" placeholder="Buscar alojamientos en Seoul..." 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent">
+                    </div>
+                    <div class="flex gap-2">
+                        <select id="typeFilter" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500">
+                            <option value="">Todos los tipos</option>
+                            <option value="hotel">Hoteles</option>
+                            <option value="hostel">Hostales</option>
+                        </select>
+                        <select id="priceFilter" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500">
+                            <option value="">Todos los precios</option>
+                            <option value="low">Económico</option>
+                            <option value="medium">Medio</option>
+                            <option value="high">Lujo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accommodations Grid -->
+            <div id="accommodationsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Accommodations will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Section -->
+    <section id="chat" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+                Chat con Otras Viajeras
+            </h2>
+            
+            <!-- Chat Interface -->
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Chat Header -->
+                <div class="bg-pink-500 text-white p-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-semibold">Chat Global</h3>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm">Usuarios conectados: <span id="userCount">0</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Messages -->
+                <div id="chatMessages" class="h-96 overflow-y-auto p-4 space-y-4">
+                    <!-- Messages will be loaded here -->
+                </div>
+
+                <!-- Chat Input -->
+                <div class="border-t p-4">
+                    <div class="flex space-x-2">
+                        <input type="text" id="messageInput" placeholder="Escribe tu mensaje..." 
+                               class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent">
+                        <button id="sendBtn" class="bg-pink-500 text-white px-6 py-2 rounded-lg hover:bg-pink-600 transition-colors">
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Button -->
+    <button id="emergencyBtn" class="fixed bottom-6 right-6 bg-red-500 text-white p-4 rounded-full shadow-lg hover:bg-red-600 transition-colors z-50">
+        <i class="fas fa-phone text-xl"></i>
+    </button>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg max-w-md w-full p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Iniciar Sesión</h3>
+                    <button id="closeAuthModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <form id="authForm">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+                            <input type="password" id="password" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Código de Verificación (Opcional)</label>
+                            <input type="text" id="verificationCode" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                                   placeholder="Código especial para administradores">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-pink-500 text-white py-3 rounded-lg font-semibold hover:bg-pink-600 transition-colors mt-6">
+                        Iniciar Sesión
+                    </button>
+                </form>
+
+                <div class="mt-4 text-center">
+                    <p class="text-sm text-gray-600">
+                        ¿No tienes cuenta? 
+                        <a href="#" class="text-pink-500 hover:text-pink-600">Regístrate aquí</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Modal -->
+    <div id="emergencyModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg max-w-md w-full p-6">
+                <div class="text-center">
+                    <div class="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-phone text-red-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Emergencia</h3>
+                    <p class="text-gray-600 mb-6">¿Necesitas ayuda inmediata?</p>
+                    
+                    <div class="space-y-3">
+                        <button id="callEmergency" class="w-full bg-red-500 text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition-colors">
+                            <i class="fas fa-phone mr-2"></i>
+                            Llamar a Emergencias
+                        </button>
+                        <button id="shareLocation" class="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            Compartir Ubicación
+                        </button>
+                    </div>
+                    
+                    <button id="closeEmergencyModal" class="mt-4 text-gray-500 hover:text-gray-700">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

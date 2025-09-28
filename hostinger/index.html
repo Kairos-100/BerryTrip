@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BerryTrip - Viaja Segura</title>
+    <meta name="description" content="Plataforma segura para mujeres que viajan solas">
+    <meta name="keywords" content="viajes, mujeres, seguridad, turismo, comunidad">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-inter">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="w-8 h-8 berry-gradient rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">B</span>
+                        </div>
+                        <span class="ml-2 text-2xl font-bold text-berry-600">BerryTrip</span>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#mapa" class="flex items-center text-gray-700 hover:text-berry-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>Mapa de Seguridad
+                    </a>
+                    <a href="#reservas" class="flex items-center text-gray-700 hover:text-berry-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>Reservas
+                    </a>
+                    <a href="#chat" class="flex items-center text-gray-700 hover:text-berry-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <i data-lucide="message-circle" class="w-4 h-4 mr-2"></i>Chat
+                    </a>
+                    <a href="#emergencia" class="flex items-center text-gray-700 hover:text-berry-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <i data-lucide="shield" class="w-4 h-4 mr-2"></i>Emergencia
+                    </a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button onclick="openAuthModal()" class="berry-gradient text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity">
+                        Iniciar Sesión
+                    </button>
+                    <button class="md:hidden p-2 rounded-md text-gray-700 hover:text-berry-600">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+                    Viaja <span class="text-berry-600">Segura</span> con<br/>
+                    <span class="text-safety-600">BerryTrip</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    La primera plataforma diseñada exclusivamente para mujeres que viajan solas. 
+                    Conecta, reserva y viaja con total seguridad.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                    <button onclick="openAuthModal()" class="berry-gradient text-white px-8 py-4 rounded-xl text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg">
+                        Comenzar Ahora
+                    </button>
+                    <button onclick="scrollToSection('mapa')" class="border-2 border-berry-600 text-berry-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-berry-50 transition-colors">
+                        Ver Demo
+                    </button>
+                </div>
+                
+                <!-- Features Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="w-12 h-12 berry-gradient rounded-xl flex items-center justify-center mb-4 mx-auto">
+                            <i data-lucide="map-pin" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Mapa de Seguridad</h3>
+                        <p class="text-gray-600 text-sm">Conecta con otras viajeras cerca de ti</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="w-12 h-12 berry-gradient rounded-xl flex items-center justify-center mb-4 mx-auto">
+                            <i data-lucide="shield" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Alojamientos Verificados</h3>
+                        <p class="text-gray-600 text-sm">Solo lugares seguros para mujeres</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="w-12 h-12 berry-gradient rounded-xl flex items-center justify-center mb-4 mx-auto">
+                            <i data-lucide="users" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Comunidad Global</h3>
+                        <p class="text-gray-600 text-sm">Chat con mujeres de tu destino</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="w-12 h-12 berry-gradient rounded-xl flex items-center justify-center mb-4 mx-auto">
+                            <i data-lucide="star" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Botón de Emergencia</h3>
+                        <p class="text-gray-600 text-sm">Contacto directo con policía local</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Background decorations -->
+        <div class="absolute top-0 left-0 w-full h-full -z-10">
+            <div class="absolute top-20 left-10 w-32 h-32 bg-berry-200 rounded-full opacity-20"></div>
+            <div class="absolute top-40 right-20 w-24 h-24 bg-safety-200 rounded-full opacity-20"></div>
+            <div class="absolute bottom-20 left-1/4 w-16 h-16 bg-berry-300 rounded-full opacity-20"></div>
+        </div>
+    </section>
+
+    <!-- Mapa de Seguridad Section -->
+    <section id="mapa" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Mapa de <span class="text-berry-600">Seguridad</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Conecta con otras mujeres viajeras cerca de ti. Tu ubicación solo se comparte 
+                    con tu consentimiento y puedes desactivarla en cualquier momento.
+                </p>
+            </div>
+
+            <div class="bg-berry-50 rounded-2xl p-8 text-center">
+                <i data-lucide="shield" class="w-16 h-16 text-berry-600 mx-auto mb-4"></i>
+                <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+                    Inicia sesión para acceder al mapa
+                </h3>
+                <p class="text-gray-600 mb-6">
+                    Necesitas estar registrada para ver y compartir tu ubicación de forma segura
+                </p>
+                <button onclick="openAuthModal()" class="berry-gradient text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                    Iniciar Sesión
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservas Section -->
+    <section id="reservas" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Alojamientos en <span class="text-berry-600">Seúl</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Descubre los mejores alojamientos seguros y verificados en Seúl, Corea del Sur. 
+                    Desde hostales solo para mujeres hasta hoteles de lujo, todos verificados por nuestra comunidad.
+                </p>
+            </div>
+
+            <div class="bg-berry-50 rounded-2xl p-8 text-center">
+                <i data-lucide="shield" class="w-16 h-16 text-berry-600 mx-auto mb-4"></i>
+                <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+                    Inicia sesión para hacer reservas
+                </h3>
+                <p class="text-gray-600 mb-6">
+                    Necesitas estar registrada para acceder a nuestros alojamientos verificados
+                </p>
+                <button onclick="openAuthModal()" class="berry-gradient text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                    Iniciar Sesión
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Section -->
+    <section id="chat" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Comunidad <span class="text-berry-600">Global</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Conecta con otras mujeres viajeras en tu destino. Comparte experiencias, 
+                    consejos de seguridad y haz nuevas amigas.
+                </p>
+            </div>
+
+            <!-- Chat Interface (se muestra cuando el usuario está logueado) -->
+            <div id="chatInterface" class="hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Lista de chats -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-2xl shadow-lg p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Salas de Chat</h3>
+                            <div class="space-y-2" id="chatRoomsList">
+                                <!-- Las salas se cargan dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat activo -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-2xl shadow-lg h-[600px] flex flex-col">
+                            <!-- Header del chat -->
+                            <div class="p-4 border-b border-gray-200 flex items-center justify-between" id="chatHeader">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-berry-500 rounded-full flex items-center justify-center text-white font-semibold">
+                                        <i data-lucide="users" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <h3 class="font-semibold text-gray-900" id="currentChatName">Selecciona una sala</h3>
+                                        <p class="text-sm text-gray-600" id="currentChatParticipants">0 participantes</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="refreshChat()" class="p-2 text-gray-400 hover:text-gray-600 transition-colors" title="Refrescar chat">
+                                        <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                                    </button>
+                                    <button onclick="clearChat()" class="p-2 text-gray-400 hover:text-red-600 transition-colors" title="Limpiar chat">
+                                        <i data-lucide="trash-2" class="w-5 h-5"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Mensajes -->
+                            <div class="flex-1 p-4 overflow-y-auto" id="chatMessages">
+                                <div class="text-center text-gray-500 py-8">
+                                    <i data-lucide="message-circle" class="w-12 h-12 mx-auto mb-4 text-gray-300"></i>
+                                    <p>Selecciona una sala de chat para comenzar</p>
+                                </div>
+                            </div>
+
+                            <!-- Input del chat -->
+                            <div class="p-4 border-t border-gray-200" id="chatInput" style="display: none;">
+                                <div class="flex space-x-2">
+                                    <input type="text" id="messageInput" 
+                                           class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-berry-500 focus:border-transparent"
+                                           placeholder="Escribe tu mensaje..." 
+                                           onkeypress="handleMessageKeyPress(event)">
+                                    <button onclick="sendMessage()" 
+                                            class="px-6 py-2 berry-gradient text-white rounded-lg hover:opacity-90 transition-opacity">
+                                        <i data-lucide="send" class="w-5 h-5"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt de login (se muestra cuando el usuario no está logueado) -->
+            <div class="bg-berry-50 rounded-2xl p-8 text-center" id="chatLoginPrompt">
+                <i data-lucide="message-circle" class="w-16 h-16 text-berry-600 mx-auto mb-4"></i>
+                <h3 class="text-2xl font-semibold text-gray-900 mb-4">
+                    Inicia sesión para acceder al chat
+                </h3>
+                <p class="text-gray-600 mb-6">
+                    Únete a la conversación con otras mujeres viajeras
+                </p>
+                <button onclick="openAuthModal()" class="berry-gradient text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                    Iniciar Sesión
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botón de Emergencia Flotante -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="openEmergencyModal()" class="emergency-button text-white p-4 rounded-full shadow-2xl hover:scale-105 transition-transform" title="Botón de Emergencia">
+            <i data-lucide="alert-triangle" class="w-8 h-8"></i>
+        </button>
+    </div>
+
+    <!-- Modal de Autenticación -->
+    <div id="authModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <!-- Header -->
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 berry-gradient rounded-full flex items-center justify-center mr-3">
+                            <i data-lucide="shield" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900" id="authTitle">Iniciar Sesión</h2>
+                            <p class="text-sm text-gray-600" id="authSubtitle">Bienvenida de vuelta</p>
+                        </div>
+                    </div>
+                    <button onclick="closeAuthModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Formulario -->
+            <form id="authForm" class="p-6 space-y-6">
+                <!-- Código de Administrador -->
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <div class="flex items-start">
+                        <i data-lucide="alert-circle" class="w-5 h-5 text-yellow-600 mr-3 mt-0.5"></i>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-yellow-800 mb-2">Código de Administrador</h4>
+                            <p class="text-sm text-yellow-700 mb-3">
+                                Si tienes un código de administrador, ingrésalo para acceso completo.
+                            </p>
+                            <input
+                                type="text"
+                                id="adminCode"
+                                class="w-full px-3 py-2 border border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-gray-900"
+                                placeholder="Código de administrador (opcional)"
+                            />
+                            <div id="adminStatus" class="hidden flex items-center mt-2 text-green-600">
+                                <i data-lucide="check-circle" class="w-4 h-4 mr-2"></i>
+                                <span class="text-sm font-medium">Modo administrador activado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nombre (solo registro) -->
+                <div id="nameField" class="hidden">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Nombre completo
+                    </label>
+                    <div class="relative">
+                        <i data-lucide="user" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                        <input
+                            type="text"
+                            id="userName"
+                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-berry-500 focus:border-transparent text-gray-900"
+                            placeholder="Tu nombre completo"
+                        />
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Correo electrónico
+                    </label>
+                    <div class="relative">
+                        <i data-lucide="mail" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                        <input
+                            type="email"
+                            id="userEmail"
+                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-berry-500 focus:border-transparent text-gray-900"
+                            placeholder="tu@email.com"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <!-- Contraseña -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Contraseña
+                    </label>
+                    <div class="relative">
+                        <i data-lucide="lock" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                        <input
+                            type="password"
+                            id="userPassword"
+                            class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-berry-500 focus:border-transparent text-gray-900"
+                            placeholder="Tu contraseña"
+                            required
+                        />
+                        <button type="button" onclick="togglePassword('userPassword')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                            <i data-lucide="eye" class="w-5 h-5" id="passwordIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Confirmar Contraseña (solo registro) -->
+                <div id="confirmPasswordField" class="hidden">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Confirmar contraseña
+                    </label>
+                    <div class="relative">
+                        <i data-lucide="lock" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-berry-500 focus:border-transparent text-gray-900"
+                            placeholder="Confirma tu contraseña"
+                        />
+                        <button type="button" onclick="togglePassword('confirmPassword')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                            <i data-lucide="eye" class="w-5 h-5" id="confirmPasswordIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Términos (solo registro) -->
+                <div id="termsField" class="hidden flex items-start">
+                    <input
+                        type="checkbox"
+                        id="acceptTerms"
+                        class="mt-1 h-4 w-4 text-berry-600 focus:ring-berry-500 border-gray-300 rounded"
+                    />
+                    <label class="ml-3 text-sm text-gray-600">
+                        Acepto los <a href="#" class="text-berry-600 hover:text-berry-500 font-medium">términos y condiciones</a> 
+                        y la <a href="#" class="text-berry-600 hover:text-berry-500 font-medium">política de privacidad</a>
+                    </label>
+                </div>
+
+                <!-- Botón de envío -->
+                <button
+                    type="submit"
+                    id="submitButton"
+                    class="w-full berry-gradient text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                >
+                    Iniciar Sesión
+                </button>
+
+                <!-- Cambiar modo -->
+                <div class="text-center">
+                    <button
+                        type="button"
+                        onclick="toggleAuthMode()"
+                        class="text-berry-600 hover:text-berry-500 font-medium"
+                        id="toggleButton"
+                    >
+                        ¿No tienes cuenta? Regístrate
+                    </button>
+                </div>
+            </form>
+
+            <!-- Footer -->
+            <div class="px-6 py-4 bg-gray-50 rounded-b-2xl">
+                <div class="flex items-center justify-center text-sm text-gray-600">
+                    <i data-lucide="shield" class="w-4 h-4 mr-2 text-green-500"></i>
+                    <span>Tu información está protegida y encriptada</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Emergencia -->
+    <div id="emergencyModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <!-- Header -->
+            <div class="bg-red-500 text-white p-6 rounded-t-2xl">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <i data-lucide="shield" class="w-8 h-8 mr-3"></i>
+                        <div>
+                            <h2 class="text-2xl font-bold">Emergencia</h2>
+                            <p class="text-red-100">¿Necesitas ayuda inmediata?</p>
+                        </div>
+                    </div>
+                    <button onclick="closeEmergencyModal()" class="text-white hover:text-red-200 transition-colors">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contenido -->
+            <div class="p-6 space-y-6">
+                <!-- Información de ubicación -->
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <h3 class="font-semibold text-gray-900 mb-2 flex items-center">
+                        <i data-lucide="map-pin" class="w-5 h-5 mr-2 text-red-500"></i>
+                        Tu Ubicación
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Detecta automáticamente tu ubicación para mostrar el número de emergencias correcto
+                    </p>
+                    <button onclick="getCurrentLocation()" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center">
+                        <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                        Detectar Ubicación
+                    </button>
+                </div>
+
+                <!-- Números de emergencia -->
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-4 flex items-center">
+                        <i data-lucide="phone" class="w-5 h-5 mr-2 text-red-500"></i>
+                        Llamar a Emergencias
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">🇪🇸</span>
+                                <div>
+                                    <p class="font-medium text-gray-900">España</p>
+                                    <p class="text-sm text-gray-600">Emergencias</p>
+                                </div>
+                            </div>
+                            <button onclick="callEmergency('112')" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors flex items-center">
+                                <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                                112
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">🇺🇸</span>
+                                <div>
+                                    <p class="font-medium text-gray-900">Estados Unidos</p>
+                                    <p class="text-sm text-gray-600">Emergency</p>
+                                </div>
+                            </div>
+                            <button onclick="callEmergency('911')" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors flex items-center">
+                                <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                                911
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-3">🇰🇷</span>
+                                <div>
+                                    <p class="font-medium text-gray-900">Corea del Sur</p>
+                                    <p class="text-sm text-gray-600">Police</p>
+                                </div>
+                            </div>
+                            <button onclick="callEmergency('112')" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors flex items-center">
+                                <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                                112
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información adicional -->
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <div class="flex items-start">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 text-yellow-600 mr-3 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-semibold text-yellow-800 mb-2">Información Importante</h4>
+                            <ul class="text-sm text-yellow-700 space-y-1">
+                                <li>• Mantén la calma y habla claramente</li>
+                                <li>• Proporciona tu ubicación exacta</li>
+                                <li>• Describe la situación de emergencia</li>
+                                <li>• No cuelgues hasta que te lo indiquen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón de cierre -->
+                <button onclick="closeEmergencyModal()" class="w-full bg-gray-200 text-gray-800 py-3 rounded-lg hover:bg-gray-300 transition-colors font-medium">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
