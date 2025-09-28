@@ -1,10 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useSocket } from './useSocket';
 
+interface Location {
+  lat: number;
+  lng: number;
+  timestamp: string;
+}
+
+interface User {
+  id: string;
+  username: string;
+  location: Location;
+}
+
 export const useLocation = () => {
   const { socket } = useSocket();
-  const [userLocation, setUserLocation] = useState(null);
-  const [nearbyUsers, setNearbyUsers] = useState([]);
+  const [userLocation, setUserLocation] = useState<Location | null>(null);
+  const [nearbyUsers, setNearbyUsers] = useState<User[]>([]);
   const [isLocationEnabled, setIsLocationEnabled] = useState(false);
 
   useEffect(() => {

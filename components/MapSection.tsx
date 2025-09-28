@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { MapPin, Users, Shield, Eye, EyeOff, Wifi, WifiOff, RefreshCw } from 'lucide-react'
 import { useSocket } from '@/hooks/useSocket'
-import { useLocation } from '@/hooks/useLocation'
 
 // Importación dinámica para evitar problemas de SSR con Leaflet
 const Map = dynamic(() => import('./Map'), { ssr: false })

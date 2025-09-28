@@ -3,8 +3,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { MessageCircle, Users, MapPin, Send, Smile, Image, Phone, Globe, Wifi, WifiOff } from 'lucide-react'
 import { useSocket } from '@/hooks/useSocket'
-import { useChat } from '@/hooks/useChat'
-import { useLocation } from '@/hooks/useLocation'
 
 interface ChatSectionProps {
   user: any

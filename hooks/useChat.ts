@@ -1,9 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useSocket } from './useSocket';
 
+interface Message {
+  id: string;
+  message: string;
+  username: string;
+  timestamp: Date;
+}
+
 export const useChat = () => {
   const { socket, isConnected } = useSocket();
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [userCount, setUserCount] = useState(0);
 
   useEffect(() => {
@@ -38,7 +45,7 @@ export const useChat = () => {
     };
   }, [socket]);
 
-  const sendMessage = (message, username = 'Usuario') => {
+  const sendMessage = (message: string, username: string = 'Usuario') => {
     if (socket && message.trim()) {
       socket.emit('sendMessage', {
         message: message.trim(),

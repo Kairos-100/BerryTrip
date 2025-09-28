@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   images: {
     domains: ['images.unsplash.com', 'via.placeholder.com'],
   },
+  experimental: {
+    // Configuración experimental si es necesaria
+  },
+  // Configuración para Vercel
+  output: 'standalone',
 }
 
 module.exports = nextConfig
