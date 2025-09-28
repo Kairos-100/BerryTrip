@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { MapPin, Users, Shield, Eye, EyeOff, Wifi, WifiOff, RefreshCw } from 'lucide-react'
-import { useSocket, useLocation } from '@/hooks/useSocket'
+import { useSocket } from '@/hooks/useSocket'
+import { useLocation } from '@/hooks/useLocation'
 
 // Importación dinámica para evitar problemas de SSR con Leaflet
 const Map = dynamic(() => import('./Map'), { ssr: false })
@@ -20,13 +21,36 @@ export default function MapSection({ user }: MapSectionProps) {
   // Socket.IO connection
   const { socket, isConnected } = useSocket()
   
-  // Location functionality
-  const { 
-    location, 
-    nearbyUsers, 
-    getCurrentLocation, 
-    findNearbyUsers 
-  } = useLocation(socket)
+  // Location functionality - simplified for now
+  const [location, setLocation] = useState<any>(null)
+  const [nearbyUsers, setNearbyUsers] = useState<any[]>([])
+  
+  const getCurrentLocation = async () => {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(new Error('Geolocalización no soportada'))
+        return
+      }
+      
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const loc = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          }
+          setLocation(loc)
+          resolve(loc)
+        },
+        (error) => reject(error),
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+      )
+    })
+  }
+  
+  const findNearbyUsers = (radius: number) => {
+    // Simplified nearby users functionality
+    setNearbyUsers([])
+  }
 
   // Obtener ubicación del usuario
   const handleGetLocation = async () => {

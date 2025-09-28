@@ -23,13 +23,13 @@ export default function ChatSection({ user }: ChatSectionProps) {
   const { socket, isConnected } = useSocket()
   
   // Chat functionality - simplified for now
-  const [messages, setMessages] = useState([])
-  const [users, setUsers] = useState([])
-  const [typingUsers, setTypingUsers] = useState([])
+  const [messages, setMessages] = useState<any[]>([])
+  const [users, setUsers] = useState<any[]>([])
+  const [typingUsers, setTypingUsers] = useState<any[]>([])
   
   // Location functionality - simplified for now
-  const [location, setLocation] = useState(null)
-  const [nearbyUsers, setNearbyUsers] = useState([])
+  const [location, setLocation] = useState<any>(null)
+  const [nearbyUsers, setNearbyUsers] = useState<any[]>([])
   
   // Simplified functions
   const sendMessage = (message: string) => {
@@ -105,11 +105,11 @@ export default function ChatSection({ user }: ChatSectionProps) {
   ]
 
   // Datos simulados de chats (ahora se generan dinámicamente)
-  const [availableChats, setAvailableChats] = useState([])
+  const [availableChats, setAvailableChats] = useState<any[]>([])
 
   // Generar salas de chat basadas en países y ciudades
   useEffect(() => {
-    const chats = []
+    const chats: any[] = []
     countries.forEach(country => {
       country.cities.forEach(city => {
         chats.push({
