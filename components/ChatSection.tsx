@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { MessageCircle, Users, MapPin, Send, Smile, Image, Phone, Globe, Wifi, WifiOff } from 'lucide-react'
-import { useSocket, useChat, useLocation } from '@/hooks/useSocket'
+import { useSocket } from '@/hooks/useSocket'
+import { useChat } from '@/hooks/useChat'
+import { useLocation } from '@/hooks/useLocation'
 
 interface ChatSectionProps {
   user: any
@@ -18,26 +20,76 @@ export default function ChatSection({ user }: ChatSectionProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Socket.IO connection
-  const { socket, isConnected, error } = useSocket()
+  const { socket, isConnected } = useSocket()
   
-  // Chat functionality
-  const { 
-    messages, 
-    users, 
-    typingUsers, 
-    sendMessage, 
-    shareLocation: shareLocationInChat,
-    startTyping,
-    stopTyping
-  } = useChat(socket, activeChat, user)
-
-  // Location functionality
-  const { 
-    location, 
-    nearbyUsers, 
-    getCurrentLocation, 
-    findNearbyUsers 
-  } = useLocation(socket)
+  // Chat functionality - simplified for now
+  const [messages, setMessages] = useState([])
+  const [users, setUsers] = useState([])
+  const [typingUsers, setTypingUsers] = useState([])
+  
+  // Location functionality - simplified for now
+  const [location, setLocation] = useState(null)
+  const [nearbyUsers, setNearbyUsers] = useState([])
+  
+  // Simplified functions
+  const sendMessage = (message: string) => {
+    if (message.trim()) {
+      const newMessage = {
+        id: Date.now(),
+        user: { id: user?.id || 'user', name: user?.name || 'Usuario' },
+        message: message.trim(),
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, newMessage])
+    }
+  }
+  
+  const getCurrentLocation = async () => {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(new Error('Geolocalización no soportada'))
+        return
+      }
+      
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const loc = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          }
+          setLocation(loc)
+          resolve(loc)
+        },
+        (error) => reject(error),
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+      )
+    })
+  }
+  
+  const shareLocationInChat = (loc: any) => {
+    if (loc) {
+      const locationMessage = {
+        id: Date.now(),
+        user: { id: user?.id || 'user', name: user?.name || 'Usuario' },
+        message: `📍 Ubicación compartida: ${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)}`,
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, locationMessage])
+    }
+  }
+  
+  const startTyping = () => {
+    // Simplified typing functionality
+  }
+  
+  const stopTyping = () => {
+    // Simplified typing functionality
+  }
+  
+  const findNearbyUsers = (radius: number) => {
+    // Simplified nearby users functionality
+    setNearbyUsers([])
+  }
 
   const countries = [
     { code: 'ES', name: 'España', cities: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla'] },

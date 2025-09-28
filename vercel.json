@@ -6,16 +6,11 @@
       "use": "@vercel/next"
     }
   ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+  "functions": {
+    "pages/api/socket.js": {
+      "maxDuration": 30
     }
-  ],
+  },
   "env": {
     "NODE_ENV": "production"
   }

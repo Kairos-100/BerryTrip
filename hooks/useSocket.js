@@ -7,7 +7,7 @@ export const useSocket = () => {
 
   useEffect(() => {
     const socketInstance = io(process.env.NODE_ENV === 'production' 
-      ? 'https://berrytrip.vercel.app' 
+      ? window.location.origin
       : 'http://localhost:3000'
     );
 
