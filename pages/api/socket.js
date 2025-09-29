@@ -1,8 +1,8 @@
-import { Server } from 'socket.io';
+const { Server } = require('socket.io');
 
 let io;
 
-export default function handler(req, res) {
+module.exports = function handler(req, res) {
   if (res.socket.server.io) {
     console.log('Socket is already running');
   } else {
