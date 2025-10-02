@@ -11,14 +11,14 @@
     "logout": "Sign Out"
   },
   "hero": {
-    "title": "Travel Safe with",
+    "title": "Travel Safe with Segura con",
     "subtitle": "The first platform designed exclusively for women traveling alone. Connect, book and travel with complete safety.",
     "getStarted": "Get Started",
     "viewDemo": "View Demo",
     "features": {
       "map": {
         "title": "Safety Map",
-        "description": "Connect with other female travelers near you"
+        "description": "Connect with other women travelers near you. Your location is only shared with your consent and you can deactivate it at any time."
       },
       "accommodations": {
         "title": "Verified Accommodations",
@@ -60,9 +60,17 @@
       "viewDetails": "View Details"
     }
   },
+  "map": {
+    "title": "Safety Map",
+    "subtitle": "Connect with other women travelers near you. Your location is only shared with your consent and you can deactivate it at any time.",
+    "loginRequired": {
+      "title": "Log in to access the map",
+      "description": "You need to be registered to view and share your location securely"
+    }
+  },
   "chat": {
-    "title": "Global Community",
-    "subtitle": "Connect with other female travelers at your destination. Share experiences, safety tips and make new friends in real time.",
+    "title": "Global Community Global",
+    "subtitle": "Connect with other female travelers at your destination. Share experiences, exchange safety tips, and make new friends in real-time.",
     "status": {
       "connected": "Connected in real time",
       "disconnected": "Disconnected"

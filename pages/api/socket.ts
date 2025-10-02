@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-// Simulamos una base de datos en memoria (en producción usarías una base de datos real)
+// Simulate an in-memory database (in production you would use a real database)
 let messages: any[] = []
 let users: any[] = []
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  // Configurar headers CORS
+  // Configure CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
@@ -20,7 +20,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === 'GET') {
-    // Obtener mensajes
+    // Get messages
     res.status(200).json({ 
       messages,
       users,
@@ -31,11 +31,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === 'POST') {
-    // Enviar mensaje
+    // Send message
     const { message, username, room } = req.body
     
     if (!message || !username) {
-      res.status(400).json({ error: 'Mensaje y usuario son requeridos' })
+      res.status(400).json({ error: 'Message and username are required' })
       return
     }
 
@@ -49,18 +49,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     messages.push(newMessage)
     
-    // Mantener solo los últimos 100 mensajes
+    // Keep only the last 100 messages
     if (messages.length > 100) {
       messages = messages.slice(-100)
     }
 
     res.status(200).json({ 
-      message: 'Mensaje enviado',
+      message: 'Message sent',
       data: newMessage,
       status: 'ok'
     })
     return
   }
 
-  res.status(405).json({ error: 'Método no permitido' })
+  res.status(405).json({ error: 'Method not allowed' })
 }

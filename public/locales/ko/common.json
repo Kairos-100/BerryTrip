@@ -11,26 +11,26 @@
     "logout": "로그아웃"
   },
   "hero": {
-    "title": "안전하게 여행하세요",
-    "subtitle": "혼자 여행하는 여성을 위해 특별히 설계된 첫 번째 플랫폼입니다. 연결하고, 예약하고, 완전한 안전과 함께 여행하세요.",
+    "title": "Travel Safe with Segura con",
+    "subtitle": "혼자 여행하는 여성을 위해 특별히 설계된 최초의 플랫폼입니다. 연결하고, 예약하고, 완전한 안전과 함께 여행하세요.",
     "getStarted": "시작하기",
     "viewDemo": "데모 보기",
     "features": {
       "map": {
         "title": "안전 지도",
-        "description": "근처의 다른 여성 여행자들과 연결하세요"
+        "description": "근처의 다른 여성 여행자들과 연결하세요. 귀하의 위치는 동의하에만 공유되며 언제든지 비활성화할 수 있습니다."
       },
       "accommodations": {
         "title": "검증된 숙소",
-        "description": "여성을 위한 안전한 장소만"
+        "description": "여성만을 위한 안전한 장소"
       },
       "community": {
         "title": "글로벌 커뮤니티",
-        "description": "목적지의 여성들과 채팅하세요"
+        "description": "목적지의 여성 여행자들과 채팅하세요"
       },
       "emergency": {
         "title": "비상 버튼",
-        "description": "현지 경찰과 직접 연락"
+        "description": "현지 경찰과 직접 연락하세요"
       }
     }
   },
@@ -39,7 +39,7 @@
     "subtitle": "서울, 대한민국의 최고의 안전하고 검증된 숙소를 발견하세요. 여성 전용 호스텔부터 럭셔리 호텔까지, 모두 우리 커뮤니티에서 검증되었습니다.",
     "loginRequired": {
       "title": "예약하려면 로그인하세요",
-      "description": "검증된 숙소에 접근하려면 등록이 필요합니다"
+      "description": "검증된 숙소에 접근하려면 회원가입이 필요합니다"
     },
     "search": {
       "placeholder": "서울에서 검색 (명동, 강남, 홍대...)",
@@ -60,8 +60,16 @@
       "viewDetails": "자세히 보기"
     }
   },
+  "map": {
+    "title": "안전 지도",
+    "subtitle": "근처의 다른 여성 여행자들과 연결하세요. 귀하의 위치는 동의하에만 공유되며 언제든지 비활성화할 수 있습니다.",
+    "loginRequired": {
+      "title": "지도에 접근하려면 로그인하세요",
+      "description": "안전하게 위치를 보고 공유하려면 회원가입이 필요합니다"
+    }
+  },
   "chat": {
-    "title": "글로벌 커뮤니티",
+    "title": "글로벌 커뮤니티 Global",
     "subtitle": "목적지의 다른 여성 여행자들과 연결하세요. 경험을 공유하고, 안전 팁을 나누며, 실시간으로 새로운 친구를 만드세요.",
     "status": {
       "connected": "실시간 연결됨",
@@ -69,7 +77,7 @@
     },
     "loginRequired": {
       "title": "채팅에 접근하려면 로그인하세요",
-      "description": "다른 여성 여행자들과 대화에 참여하세요"
+      "description": "다른 여성 여행자들과 대화에 참여해보세요"
     },
     "availableChats": "사용 가능한 채팅",
     "country": "국가",
