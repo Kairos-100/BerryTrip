@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { authUtils } from '../../../lib/auth'
-import { db } from '../../../lib/database'
+import { db } from '../../../lib/database-config'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Configure CORS headers

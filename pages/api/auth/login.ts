@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { db } from '../../../lib/database'
+import { db } from '../../../lib/database-config'
 import { authUtils } from '../../../lib/auth'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

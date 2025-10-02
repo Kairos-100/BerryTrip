@@ -1,8 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-
-// Simulate an in-memory database (in production you would use a real database)
-let messages: any[] = []
-let users: any[] = []
+import { db } from '../../lib/database-config'
 
 // Function to detect if the request is from a mobile device
 function isMobileDevice(req: NextApiRequest): boolean {
@@ -25,7 +22,7 @@ function isMobileDevice(req: NextApiRequest): boolean {
   return mobilePatterns.some(pattern => pattern.test(userAgent))
 }
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Configure CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -43,16 +40,24 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     // Get messages
     const isMobile = isMobileDevice(req)
-    res.status(200).json({ 
-      messages,
-      users,
-      status: 'ok',
-      timestamp: new Date().toISOString(),
-      device: {
-        isMobile,
-        userAgent: req.headers['user-agent'] || 'unknown'
-      }
-    })
+    try {
+      const messages = await db.messages.getAll()
+      const users = await db.users.getAll()
+      
+      res.status(200).json({ 
+        messages,
+        users,
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        device: {
+          isMobile,
+          userAgent: req.headers['user-agent'] || 'unknown'
+        }
+      })
+    } catch (error) {
+      console.error('Error fetching messages:', error)
+      res.status(500).json({ error: 'Failed to fetch messages' })
+    }
     return
   }
 
@@ -66,34 +71,31 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     const isMobile = isMobileDevice(req)
-    const newMessage = {
-      id: Date.now().toString(),
-      message: message.trim(),
-      username,
-      room: room || 'global',
-      timestamp: new Date().toISOString(),
-      device: {
-        isMobile,
-        userAgent: req.headers['user-agent'] || 'unknown'
-      }
-    }
-
-    messages.push(newMessage)
     
-    // Keep only the last 100 messages
-    if (messages.length > 100) {
-      messages = messages.slice(-100)
-    }
+    try {
+      const newMessage = await db.messages.create({
+        message: message.trim(),
+        username,
+        room: room || 'global',
+        device: {
+          isMobile,
+          userAgent: req.headers['user-agent'] || 'unknown'
+        }
+      })
 
-    res.status(200).json({ 
-      message: 'Message sent',
-      data: newMessage,
-      status: 'ok',
-      device: {
-        isMobile,
-        userAgent: req.headers['user-agent'] || 'unknown'
-      }
-    })
+      res.status(200).json({ 
+        message: 'Message sent',
+        data: newMessage,
+        status: 'ok',
+        device: {
+          isMobile,
+          userAgent: req.headers['user-agent'] || 'unknown'
+        }
+      })
+    } catch (error) {
+      console.error('Error sending message:', error)
+      res.status(500).json({ error: 'Failed to send message' })
+    }
     return
   }
 

@@ -96,6 +96,43 @@ export const db = {
         new Date(token.expiresAt) > now
       )
     }
+  },
+  
+  // Message operations (for in-memory database)
+  messages: {
+    create: (messageData: {
+      message: string
+      username: string
+      room?: string
+      device: {
+        isMobile: boolean
+        userAgent: string
+      }
+    }): any => {
+      const newMessage = {
+        id: Date.now().toString(),
+        message: messageData.message.trim(),
+        username: messageData.username,
+        room: messageData.room || 'global',
+        timestamp: new Date().toISOString(),
+        device: messageData.device
+      }
+      
+      messages.push(newMessage)
+      
+      // Keep only the last 100 messages
+      if (messages.length > 100) {
+        messages.splice(0, messages.length - 100)
+      }
+      
+      return newMessage
+    },
+    
+    getAll: (room: string = 'global'): any[] => {
+      return messages
+        .filter(msg => msg.room === room)
+        .slice(-100) // Return last 100 messages
+    }
   }
 }
 
