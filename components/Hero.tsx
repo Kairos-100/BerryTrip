@@ -2,14 +2,19 @@
 
 import { MapPin, Shield, Users, Star } from 'lucide-react'
 import { useTranslation } from '@/hooks/useTranslation'
+import { useRouter } from 'next/router'
 
 interface HeroProps {
   onGetStarted: () => void
-  onViewDemo: () => void
 }
 
-export default function Hero({ onGetStarted, onViewDemo }: HeroProps) {
+export default function Hero({ onGetStarted }: HeroProps) {
   const { t } = useTranslation()
+  const router = useRouter()
+
+  const handleViewDemo = () => {
+    router.push('/demo')
+  }
   
   const features = [
     {
@@ -39,9 +44,7 @@ export default function Hero({ onGetStarted, onViewDemo }: HeroProps) {
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            {t('hero.title')} <span className="text-berry-600">Segura</span> con
-            <br />
-            <span className="text-safety-600">BerryTrip</span>
+            {t('hero.title')} <span className="text-berry-600">{t('hero.brandName')}</span>
           </h1>
           
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
@@ -56,7 +59,7 @@ export default function Hero({ onGetStarted, onViewDemo }: HeroProps) {
               {t('hero.getStarted')}
             </button>
             <button 
-              onClick={onViewDemo}
+              onClick={handleViewDemo}
               className="border-2 border-berry-600 text-berry-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-berry-50 transition-colors"
             >
               {t('hero.viewDemo')}

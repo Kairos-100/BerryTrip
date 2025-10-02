@@ -1,20 +1,14 @@
-'use client'
-
 import { useState } from 'react'
-import { ChevronLeft, ChevronRight, X, Play, MapPin, Shield, Users, MessageCircle, Calendar, Star, Globe, Wifi, WifiOff } from 'lucide-react'
-import DemoMapSection from './DemoMapSection'
-import DemoBookingSection from './DemoBookingSection'
-import DemoChatSection from './DemoChatSection'
-import EmergencyButton from './EmergencyButton'
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useRouter } from 'next/router'
+import { ChevronLeft, ChevronRight, ArrowLeft, MapPin, Shield, Users, MessageCircle, Star, Globe, Wifi, WifiOff } from 'lucide-react'
+import { useTranslation } from 'next-i18next'
 
-interface DemoPresentationProps {
-  onExit: () => void
-}
-
-export default function DemoPresentation({ onExit }: DemoPresentationProps) {
+export default function DemoPage() {
+  const router = useRouter()
+  const { t } = useTranslation()
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [showPlatform, setShowPlatform] = useState(false)
 
   const slides = [
     {
@@ -29,21 +23,6 @@ export default function DemoPresentation({ onExit }: DemoPresentationProps) {
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             A safe space for women travelers to connect, book accommodations, and travel with confidence.
           </p>
-          <div className="flex justify-center space-x-4">
-            <button
-              onClick={() => setShowPlatform(true)}
-              className="flex items-center px-6 py-3 bg-berry-600 text-white rounded-lg hover:bg-berry-700 transition-colors"
-            >
-              <Play className="w-5 h-5 mr-2" />
-              Start Tour
-            </button>
-            <button
-              onClick={onExit}
-              className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              Skip Demo
-            </button>
-          </div>
         </div>
       )
     },
@@ -70,7 +49,12 @@ export default function DemoPresentation({ onExit }: DemoPresentationProps) {
                 </div>
                 <div className="flex items-center space-x-4">
                   <span className="text-sm text-gray-500">🌐 EN</span>
-                  <button className="px-4 py-2 bg-berry-600 text-white rounded-lg text-sm">Sign In</button>
+                  <button 
+                    onClick={() => router.push('/signup')}
+                    className="px-4 py-2 bg-berry-600 text-white rounded-lg text-sm hover:bg-berry-700"
+                  >
+                    Sign Up
+                  </button>
                 </div>
               </div>
               
@@ -83,8 +67,15 @@ export default function DemoPresentation({ onExit }: DemoPresentationProps) {
                   The first platform designed exclusively for women traveling alone
                 </p>
                 <div className="flex justify-center space-x-4">
-                  <button className="px-6 py-3 bg-berry-600 text-white rounded-lg font-semibold">Get Started</button>
-                  <button className="px-6 py-3 border-2 border-berry-600 text-berry-600 rounded-lg font-semibold">View Demo</button>
+                  <button 
+                    onClick={() => router.push('/signup')}
+                    className="px-6 py-3 bg-berry-600 text-white rounded-lg font-semibold hover:bg-berry-700"
+                  >
+                    Get Started
+                  </button>
+                  <button className="px-6 py-3 border-2 border-berry-600 text-berry-600 rounded-lg font-semibold">
+                    View Demo
+                  </button>
                 </div>
               </div>
               
@@ -662,7 +653,7 @@ export default function DemoPresentation({ onExit }: DemoPresentationProps) {
           <div className="space-y-4">
             <div className="flex justify-center space-x-4">
               <button
-                onClick={onExit}
+                onClick={() => router.push('/signup')}
                 className="px-8 py-4 berry-gradient text-white rounded-xl text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg"
               >
                 Get Started Now
@@ -699,180 +690,111 @@ export default function DemoPresentation({ onExit }: DemoPresentationProps) {
     setCurrentSlide(index)
   }
 
-  // Show platform demo
-  if (showPlatform) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
-        {/* Header */}
-        <div className="bg-white shadow-lg sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <div className="flex items-center">
-                <div className="w-8 h-8 berry-gradient rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">B</span>
-                </div>
-                <span className="ml-2 text-2xl font-bold text-berry-600">BerryTrip Demo</span>
-              </div>
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-500">Demo Mode</span>
-                <button
-                  onClick={() => setShowPlatform(false)}
-                  className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-                >
-                  Back to Slides
-                </button>
-                <button
-                  onClick={onExit}
-                  className="p-2 text-gray-400 hover:text-gray-600"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Platform Content */}
-        <div className="min-h-screen">
-          <DemoMapSection />
-          <DemoBookingSection />
-          <DemoChatSection />
-          <EmergencyButton />
-        </div>
-      </div>
-    )
-  }
-
-  if (isPlaying) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
-        {/* Header */}
-        <div className="bg-white shadow-lg sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <div className="flex items-center">
-                <div className="w-8 h-8 berry-gradient rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">B</span>
-                </div>
-                <span className="ml-2 text-2xl font-bold text-berry-600">BerryTrip Demo</span>
-              </div>
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-500">
-                  {currentSlide + 1} of {slides.length}
-                </span>
-                <button
-                  onClick={onExit}
-                  className="p-2 text-gray-400 hover:text-gray-600"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Progress Bar */}
-        <div className="bg-gray-200 h-1">
-          <div 
-            className="berry-gradient h-1 transition-all duration-300"
-            style={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
-          ></div>
-        </div>
-
-        {/* Slide Content */}
-        <div className="min-h-screen flex items-center justify-center p-8">
-          <div className="max-w-6xl mx-auto w-full">
-            <div className="text-center mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                {slides[currentSlide].title}
-              </h1>
-              <p className="text-xl text-gray-600">
-                {slides[currentSlide].subtitle}
-              </p>
-            </div>
-            
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              {slides[currentSlide].content}
-            </div>
-          </div>
-        </div>
-
-        {/* Navigation */}
-        <div className="bg-white border-t border-gray-200 sticky bottom-0">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex justify-between items-center">
-              <button
-                onClick={prevSlide}
-                disabled={currentSlide === 0}
-                className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <ChevronLeft className="w-5 h-5 mr-1" />
-                Previous
-              </button>
-
-              {/* Slide Indicators */}
-              <div className="flex space-x-2">
-                {slides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className={`w-3 h-3 rounded-full transition-colors ${
-                      index === currentSlide ? 'bg-berry-600' : 'bg-gray-300'
-                    }`}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={nextSlide}
-                disabled={currentSlide === slides.length - 1}
-                className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {currentSlide === slides.length - 1 ? 'Finish' : 'Next'}
-                <ChevronRight className="w-5 h-5 ml-1" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-8">
-      <div className="max-w-4xl mx-auto text-center">
-        <div className="bg-white rounded-2xl shadow-xl p-12">
-          <div className="w-32 h-32 berry-gradient rounded-full flex items-center justify-center mx-auto mb-8">
-            <span className="text-white font-bold text-4xl">B</span>
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
+      {/* Header */}
+      <div className="bg-white shadow-lg sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <button
+                onClick={() => router.push('/')}
+                className="flex items-center text-gray-600 hover:text-gray-900 mr-4"
+              >
+                <ArrowLeft className="w-5 h-5 mr-2" />
+                Back to Home
+              </button>
+              <div className="w-8 h-8 berry-gradient rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-lg">B</span>
+              </div>
+              <span className="ml-2 text-2xl font-bold text-berry-600">BerryTrip Demo</span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <span className="text-sm text-gray-500">
+                {currentSlide + 1} of {slides.length}
+              </span>
+              <button
+                onClick={() => router.push('/signup')}
+                className="px-4 py-2 bg-berry-600 text-white rounded-lg hover:bg-berry-700"
+              >
+                Sign Up
+              </button>
+            </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">BerryTrip Demo</h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Take an interactive tour of our platform and discover how BerryTrip makes 
-            solo female travel safe, social, and unforgettable.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        </div>
+      </div>
+
+      {/* Progress Bar */}
+      <div className="bg-gray-200 h-1">
+        <div 
+          className="berry-gradient h-1 transition-all duration-300"
+          style={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
+        ></div>
+      </div>
+
+      {/* Slide Content */}
+      <div className="min-h-screen flex items-center justify-center p-8">
+        <div className="max-w-6xl mx-auto w-full">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {slides[currentSlide].title}
+            </h1>
+            <p className="text-xl text-gray-600">
+              {slides[currentSlide].subtitle}
+            </p>
+          </div>
+          
+          <div className="bg-white rounded-2xl shadow-xl p-8">
+            {slides[currentSlide].content}
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="bg-white border-t border-gray-200 sticky bottom-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex justify-between items-center">
             <button
-              onClick={() => setShowPlatform(true)}
-              className="flex items-center justify-center px-8 py-4 berry-gradient text-white rounded-xl text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg"
+              onClick={prevSlide}
+              disabled={currentSlide === 0}
+              className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Play className="w-6 h-6 mr-2" />
-              Try Platform Demo
+              <ChevronLeft className="w-5 h-5 mr-1" />
+              Previous
             </button>
+
+            {/* Slide Indicators */}
+            <div className="flex space-x-2">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-colors ${
+                    index === currentSlide ? 'bg-berry-600' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+
             <button
-              onClick={() => setIsPlaying(true)}
-              className="px-8 py-4 border-2 border-berry-600 text-berry-600 rounded-xl text-lg font-semibold hover:bg-berry-50 transition-colors"
+              onClick={nextSlide}
+              disabled={currentSlide === slides.length - 1}
+              className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              View Slides
-            </button>
-            <button
-              onClick={onExit}
-              className="px-8 py-4 border-2 border-gray-300 text-gray-600 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-colors"
-            >
-              Skip to App
+              {currentSlide === slides.length - 1 ? 'Finish' : 'Next'}
+              <ChevronRight className="w-5 h-5 ml-1" />
             </button>
           </div>
         </div>
       </div>
     </div>
   )
+}
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? 'en', ['common'])),
+    },
+  }
 }

@@ -12,13 +12,14 @@
   },
   "hero": {
     "title": "Viaja Segura con",
+    "brandName": "BerryTrip",
     "subtitle": "La primera plataforma diseñada exclusivamente para mujeres que viajan solas. Conecta, reserva y viaja con total seguridad.",
-    "getStarted": "Comenzar Ahora",
+    "getStarted": "Comenzar",
     "viewDemo": "Ver Demo",
     "features": {
       "map": {
         "title": "Mapa de Seguridad",
-        "description": "Conecta con otras viajeras cerca de ti"
+        "description": "Conecta con otras mujeres viajeras cerca de ti. Tu ubicación solo se comparte con tu consentimiento y puedes desactivarla en cualquier momento."
       },
       "accommodations": {
         "title": "Alojamientos Verificados",
@@ -26,11 +27,11 @@
       },
       "community": {
         "title": "Comunidad Global",
-        "description": "Chat con mujeres de tu destino"
+        "description": "Chatea con mujeres de tu destino"
       },
       "emergency": {
         "title": "Botón de Emergencia",
-        "description": "Contacto directo con policía local"
+        "description": "Contacto directo con la policía local"
       }
     }
   },
@@ -58,6 +59,14 @@
       "perNight": "por noche",
       "reviews": "reseñas",
       "viewDetails": "Ver Detalles"
+    }
+  },
+  "map": {
+    "title": "Mapa de Seguridad",
+    "subtitle": "Conecta con otras mujeres viajeras cerca de ti. Tu ubicación solo se comparte con tu consentimiento y puedes desactivarla en cualquier momento.",
+    "loginRequired": {
+      "title": "Inicia sesión para acceder al mapa",
+      "description": "Necesitas estar registrada para ver y compartir tu ubicación de forma segura"
     }
   },
   "chat": {
@@ -110,6 +119,62 @@
     "noAccount": "¿No tienes cuenta?",
     "hasAccount": "¿Ya tienes cuenta?",
     "close": "Cerrar"
+  },
+  "demo": {
+    "title": "Bienvenida a la Demo de BerryTrip",
+    "subtitle": "La primera plataforma diseñada exclusivamente para mujeres que viajan solas",
+    "platformOverview": "Resumen de la Plataforma",
+    "platformSubtitle": "Experimenta la interfaz real de BerryTrip",
+    "safetyMap": "Característica del Mapa de Seguridad",
+    "safetyMapSubtitle": "Conecta con otras mujeres viajeras cerca de ti",
+    "accommodations": "Alojamientos Verificados",
+    "accommodationsSubtitle": "Solo lugares seguros para mujeres, verificados por nuestra comunidad",
+    "globalChat": "Chat de Comunidad Global",
+    "globalChatSubtitle": "Conecta con mujeres de tu destino en tiempo real",
+    "emergencyFeatures": "Características de Seguridad de Emergencia",
+    "emergencySubtitle": "Contacto directo con autoridades locales y servicios de emergencia",
+    "multiLanguage": "Soporte Multi-idioma",
+    "multiLanguageSubtitle": "Disponible en Inglés, Español y Coreano",
+    "readyToStart": "¿Lista para Comenzar?",
+    "readyToStartSubtitle": "Únete a miles de mujeres viajando de forma segura por el mundo",
+    "startJourney": "Comienza Tu Viaje Seguro",
+    "startJourneySubtitle": "Únete a nuestra comunidad de mujeres viajeras seguras. Reserva alojamientos seguros, conecta con locales y explora el mundo con tranquilidad.",
+    "backToHome": "Volver al Inicio",
+    "signUp": "Registrarse",
+    "getStartedNow": "Comenzar Ahora",
+    "watchAgain": "Ver de Nuevo",
+    "freeToJoin": "Gratis para unirse • Sin tarifas ocultas • Soporte 24/7"
+  },
+  "signup": {
+    "title": "Únete a la Comunidad BerryTrip",
+    "subtitle": "Conecta con miles de mujeres viajando de forma segura por el mundo. Tu viaje hacia viajes en solitario seguros comienza aquí.",
+    "whatYouGet": "Lo que obtienes:",
+    "safetyMap": "Mapa de Seguridad",
+    "safetyMapDesc": "Compartir ubicación en tiempo real con otras mujeres viajeras. Encuentra puntos de encuentro seguros y contactos de emergencia cerca.",
+    "verifiedAccommodations": "Alojamientos Verificados",
+    "verifiedAccommodationsDesc": "Acceso a alojamientos seguros solo para mujeres y verificados en todo el mundo.",
+    "globalCommunity": "Comunidad Global",
+    "globalCommunityDesc": "Conecta con mujeres en tu destino. Comparte experiencias, consejos y encuentra compañeras de viaje.",
+    "emergencySupport": "Soporte de Emergencia",
+    "emergencySupportDesc": "Botón de emergencia con un clic con acceso directo a autoridades locales y alertas de la comunidad.",
+    "whyChooseBerryTrip": "Por qué miles de mujeres eligen BerryTrip:",
+    "createAccount": "Crear Tu Cuenta",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo Electrónico",
+    "currentLocation": "Ubicación Actual",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "whatInterestsYou": "¿Qué te interesa más? (Selecciona todas las que apliquen)",
+    "soloTravel": "Viajes en Solitario",
+    "safety": "Seguridad y Protección",
+    "community": "Comunidad",
+    "emergency": "Soporte de Emergencia",
+    "accommodations": "Alojamientos Seguros",
+    "creatingAccount": "Creando Cuenta...",
+    "createAccountButton": "Crear Cuenta",
+    "termsAndConditions": "Al crear una cuenta, aceptas nuestros Términos de Servicio y Política de Privacidad",
+    "viewDemo": "Ver Demo"
   },
   "common": {
     "loading": "Cargando...",
