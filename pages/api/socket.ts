@@ -4,6 +4,27 @@ import { NextApiRequest, NextApiResponse } from 'next'
 let messages: any[] = []
 let users: any[] = []
 
+// Function to detect if the request is from a mobile device
+function isMobileDevice(req: NextApiRequest): boolean {
+  const userAgent = req.headers['user-agent'] || ''
+  
+  // Common mobile device patterns
+  const mobilePatterns = [
+    /Android/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
+    /Mobile/i,
+    /webOS/i,
+    /Opera Mini/i,
+    /IEMobile/i
+  ]
+  
+  return mobilePatterns.some(pattern => pattern.test(userAgent))
+}
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   // Configure CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true')
@@ -21,11 +42,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (req.method === 'GET') {
     // Get messages
+    const isMobile = isMobileDevice(req)
     res.status(200).json({ 
       messages,
       users,
       status: 'ok',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      device: {
+        isMobile,
+        userAgent: req.headers['user-agent'] || 'unknown'
+      }
     })
     return
   }
@@ -39,12 +65,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       return
     }
 
+    const isMobile = isMobileDevice(req)
     const newMessage = {
       id: Date.now().toString(),
       message: message.trim(),
       username,
       room: room || 'global',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      device: {
+        isMobile,
+        userAgent: req.headers['user-agent'] || 'unknown'
+      }
     }
 
     messages.push(newMessage)
@@ -57,7 +88,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).json({ 
       message: 'Message sent',
       data: newMessage,
-      status: 'ok'
+      status: 'ok',
+      device: {
+        isMobile,
+        userAgent: req.headers['user-agent'] || 'unknown'
+      }
     })
     return
   }

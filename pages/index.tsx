@@ -9,8 +9,9 @@ import BookingSection from '@/components/BookingSection'
 import ChatSection from '@/components/ChatSection'
 import EmergencyButton from '@/components/EmergencyButton'
 import AuthModal from '@/components/AuthModal'
+import DeviceInfo from '@/components/DeviceInfo'
 
-export default function Home() {
+export default function Home({ deviceInfo }: any) {
   const router = useRouter()
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [user, setUser] = useState(null)
@@ -29,9 +30,12 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
+      {/* Device Detection Info */}
+      {deviceInfo && <DeviceInfo deviceInfo={deviceInfo} />}
+      
       {/* Welcome Message */}
       {showWelcomeMessage && (
-        <div className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-2">
+        <div className="fixed top-4 left-4 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-2">
           <span>🎉 Welcome to BerryTrip! Your account has been created successfully.</span>
           <button
             onClick={() => setShowWelcomeMessage(false)}
