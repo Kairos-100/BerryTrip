@@ -1,0 +1,126 @@
+{
+  "header": {
+    "logo": "BerryTrip",
+    "nav": {
+      "map": "Mapa de Seguridad",
+      "bookings": "Reservas",
+      "chat": "Chat",
+      "emergency": "Emergencia"
+    },
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión"
+  },
+  "hero": {
+    "title": "Viaja Segura con",
+    "subtitle": "La primera plataforma diseñada exclusivamente para mujeres que viajan solas. Conecta, reserva y viaja con total seguridad.",
+    "getStarted": "Comenzar Ahora",
+    "viewDemo": "Ver Demo",
+    "features": {
+      "map": {
+        "title": "Mapa de Seguridad",
+        "description": "Conecta con otras viajeras cerca de ti"
+      },
+      "accommodations": {
+        "title": "Alojamientos Verificados",
+        "description": "Solo lugares seguros para mujeres"
+      },
+      "community": {
+        "title": "Comunidad Global",
+        "description": "Chat con mujeres de tu destino"
+      },
+      "emergency": {
+        "title": "Botón de Emergencia",
+        "description": "Contacto directo con policía local"
+      }
+    }
+  },
+  "booking": {
+    "title": "Alojamientos en",
+    "subtitle": "Descubre los mejores alojamientos seguros y verificados en Seúl, Corea del Sur. Desde hostales solo para mujeres hasta hoteles de lujo, todos verificados por nuestra comunidad.",
+    "loginRequired": {
+      "title": "Inicia sesión para hacer reservas",
+      "description": "Necesitas estar registrada para acceder a nuestros alojamientos verificados"
+    },
+    "search": {
+      "placeholder": "Buscar en Seúl (Myeongdong, Gangnam, Hongdae...)",
+      "checkIn": "Fecha de entrada",
+      "checkOut": "Fecha de salida",
+      "search": "Buscar"
+    },
+    "filters": {
+      "womenOnly": "Solo mujeres",
+      "verified": "Verificados",
+      "topRated": "Mejor valorados"
+    },
+    "accommodation": {
+      "verified": "Verificado",
+      "womenOnly": "Solo Mujeres",
+      "perNight": "por noche",
+      "reviews": "reseñas",
+      "viewDetails": "Ver Detalles"
+    }
+  },
+  "chat": {
+    "title": "Comunidad Global",
+    "subtitle": "Conecta con otras mujeres viajeras en tu destino. Comparte experiencias, consejos de seguridad y haz nuevas amigas en tiempo real.",
+    "status": {
+      "connected": "Conectado en tiempo real",
+      "disconnected": "Desconectado"
+    },
+    "loginRequired": {
+      "title": "Inicia sesión para acceder al chat",
+      "description": "Únete a la conversación con otras mujeres viajeras"
+    },
+    "availableChats": "Chats Disponibles",
+    "country": "País",
+    "city": "Ciudad",
+    "selectCountry": "Selecciona un país",
+    "selectCity": "Selecciona una ciudad",
+    "location": {
+      "activate": "Activar Ubicación",
+      "activated": "Ubicación Activada",
+      "modal": {
+        "title": "Activar Ubicación",
+        "description": "Permite el acceso a tu ubicación para conectar con mujeres cercanas y compartir tu ubicación de forma segura.",
+        "cancel": "Cancelar",
+        "activate": "Activar"
+      }
+    },
+    "chat": {
+      "selectChat": "Selecciona un chat para comenzar",
+      "womenOnline": "mujeres en línea",
+      "shareLocation": "Compartir ubicación",
+      "typing": "está escribiendo...",
+      "messagePlaceholder": "Escribe tu mensaje...",
+      "loadingMessages": "Cargando mensajes..."
+    }
+  },
+  "emergency": {
+    "title": "Botón de Emergencia",
+    "description": "En caso de emergencia, contacta inmediatamente con las autoridades locales"
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "name": "Nombre",
+    "confirmPassword": "Confirmar contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿No tienes cuenta?",
+    "hasAccount": "¿Ya tienes cuenta?",
+    "close": "Cerrar"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar"
+  }
+}
+
+

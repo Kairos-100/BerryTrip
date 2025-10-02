@@ -1,0 +1,126 @@
+{
+  "header": {
+    "logo": "BerryTrip",
+    "nav": {
+      "map": "Safety Map",
+      "bookings": "Bookings",
+      "chat": "Chat",
+      "emergency": "Emergency"
+    },
+    "login": "Sign In",
+    "logout": "Sign Out"
+  },
+  "hero": {
+    "title": "Travel Safe with",
+    "subtitle": "The first platform designed exclusively for women traveling alone. Connect, book and travel with complete safety.",
+    "getStarted": "Get Started",
+    "viewDemo": "View Demo",
+    "features": {
+      "map": {
+        "title": "Safety Map",
+        "description": "Connect with other female travelers near you"
+      },
+      "accommodations": {
+        "title": "Verified Accommodations",
+        "description": "Only safe places for women"
+      },
+      "community": {
+        "title": "Global Community",
+        "description": "Chat with women from your destination"
+      },
+      "emergency": {
+        "title": "Emergency Button",
+        "description": "Direct contact with local police"
+      }
+    }
+  },
+  "booking": {
+    "title": "Accommodations in",
+    "subtitle": "Discover the best safe and verified accommodations in Seoul, South Korea. From women-only hostels to luxury hotels, all verified by our community.",
+    "loginRequired": {
+      "title": "Sign in to make bookings",
+      "description": "You need to be registered to access our verified accommodations"
+    },
+    "search": {
+      "placeholder": "Search in Seoul (Myeongdong, Gangnam, Hongdae...)",
+      "checkIn": "Check-in date",
+      "checkOut": "Check-out date",
+      "search": "Search"
+    },
+    "filters": {
+      "womenOnly": "Women Only",
+      "verified": "Verified",
+      "topRated": "Top Rated"
+    },
+    "accommodation": {
+      "verified": "Verified",
+      "womenOnly": "Women Only",
+      "perNight": "per night",
+      "reviews": "reviews",
+      "viewDetails": "View Details"
+    }
+  },
+  "chat": {
+    "title": "Global Community",
+    "subtitle": "Connect with other female travelers at your destination. Share experiences, safety tips and make new friends in real time.",
+    "status": {
+      "connected": "Connected in real time",
+      "disconnected": "Disconnected"
+    },
+    "loginRequired": {
+      "title": "Sign in to access chat",
+      "description": "Join the conversation with other female travelers"
+    },
+    "availableChats": "Available Chats",
+    "country": "Country",
+    "city": "City",
+    "selectCountry": "Select a country",
+    "selectCity": "Select a city",
+    "location": {
+      "activate": "Activate Location",
+      "activated": "Location Activated",
+      "modal": {
+        "title": "Activate Location",
+        "description": "Allow access to your location to connect with nearby women and share your location safely.",
+        "cancel": "Cancel",
+        "activate": "Activate"
+      }
+    },
+    "chat": {
+      "selectChat": "Select a chat to start",
+      "womenOnline": "women online",
+      "shareLocation": "Share location",
+      "typing": "is typing...",
+      "messagePlaceholder": "Type your message...",
+      "loadingMessages": "Loading messages..."
+    }
+  },
+  "emergency": {
+    "title": "Emergency Button",
+    "description": "In case of emergency, contact local authorities immediately"
+  },
+  "auth": {
+    "login": "Sign In",
+    "register": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot your password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "close": "Close"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close"
+  }
+}
+
+

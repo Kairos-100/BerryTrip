@@ -2,12 +2,14 @@
 
 import { useState } from 'react'
 import { Calendar, MapPin, Star, Shield, Users, Search, Filter } from 'lucide-react'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface BookingSectionProps {
   user: any
 }
 
 export default function BookingSection({ user }: BookingSectionProps) {
+  const { t } = useTranslation()
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedDates, setSelectedDates] = useState({ checkIn: '', checkOut: '' })
   const [guests, setGuests] = useState(1)
@@ -98,11 +100,10 @@ export default function BookingSection({ user }: BookingSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Alojamientos en <span className="text-berry-600">Seúl</span>
+            {t('booking.title')} <span className="text-berry-600">Seúl</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Descubre los mejores alojamientos seguros y verificados en Seúl, Corea del Sur. 
-            Desde hostales solo para mujeres hasta hoteles de lujo, todos verificados por nuestra comunidad.
+            {t('booking.subtitle')}
           </p>
         </div>
 
@@ -110,10 +111,10 @@ export default function BookingSection({ user }: BookingSectionProps) {
           <div className="bg-berry-50 rounded-2xl p-8 text-center">
             <Shield className="w-16 h-16 text-berry-600 mx-auto mb-4" />
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-              Inicia sesión para hacer reservas
+              {t('booking.loginRequired.title')}
             </h3>
             <p className="text-gray-600 mb-6">
-              Necesitas estar registrada para acceder a nuestros alojamientos verificados
+              {t('booking.loginRequired.description')}
             </p>
           </div>
         ) : (
@@ -125,7 +126,7 @@ export default function BookingSection({ user }: BookingSectionProps) {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input
                     type="text"
-                    placeholder="Buscar en Seúl (Myeongdong, Gangnam, Hongdae...)"
+                    placeholder={t('booking.search.placeholder')}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-berry-500 focus:border-transparent"
@@ -154,7 +155,7 @@ export default function BookingSection({ user }: BookingSectionProps) {
                 
                 <button className="berry-gradient text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity flex items-center justify-center">
                   <Search className="w-5 h-5 mr-2" />
-                  Buscar
+                  {t('booking.search.search')}
                 </button>
               </div>
             </div>
@@ -163,15 +164,15 @@ export default function BookingSection({ user }: BookingSectionProps) {
             <div className="flex flex-wrap gap-4 justify-center">
               <button className="flex items-center px-4 py-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
                 <Filter className="w-4 h-4 mr-2" />
-                Solo mujeres
+                {t('booking.filters.womenOnly')}
               </button>
               <button className="flex items-center px-4 py-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
                 <Shield className="w-4 h-4 mr-2" />
-                Verificados
+                {t('booking.filters.verified')}
               </button>
               <button className="flex items-center px-4 py-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
                 <Star className="w-4 h-4 mr-2" />
-                Mejor valorados
+                {t('booking.filters.topRated')}
               </button>
             </div>
 
@@ -192,7 +193,7 @@ export default function BookingSection({ user }: BookingSectionProps) {
                       <div className="absolute top-4 right-4">
                         <div className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
                           <Shield className="w-4 h-4 mr-1" />
-                          Verificado
+                          {t('booking.accommodation.verified')}
                         </div>
                       </div>
                     )}
@@ -200,7 +201,7 @@ export default function BookingSection({ user }: BookingSectionProps) {
                       <div className="absolute top-4 left-4">
                         <div className="bg-berry-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
                           <Users className="w-4 h-4 mr-1" />
-                          Solo Mujeres
+                          {t('booking.accommodation.womenOnly')}
                         </div>
                       </div>
                     )}
@@ -215,7 +216,7 @@ export default function BookingSection({ user }: BookingSectionProps) {
                         <div className="text-2xl font-bold text-berry-600">
                           €{accommodation.price}
                         </div>
-                        <div className="text-sm text-gray-500">por noche</div>
+                        <div className="text-sm text-gray-500">{t('booking.accommodation.perNight')}</div>
                       </div>
                     </div>
                     
@@ -238,7 +239,7 @@ export default function BookingSection({ user }: BookingSectionProps) {
                         ))}
                       </div>
                       <span className="ml-2 text-sm text-gray-600">
-                        {accommodation.rating} ({accommodation.reviews} reseñas)
+                        {accommodation.rating} ({accommodation.reviews} {t('booking.accommodation.reviews')})
                       </span>
                     </div>
                     
@@ -252,7 +253,7 @@ export default function BookingSection({ user }: BookingSectionProps) {
                     </div>
                     
                     <button className="w-full berry-gradient text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
-                      Ver Detalles
+                      {t('booking.accommodation.viewDetails')}
                     </button>
                   </div>
                 </div>

@@ -5,53 +5,71 @@ interface Message {
   id: string;
   message: string;
   username: string;
-  timestamp: Date;
+  timestamp: string;
+  room?: string;
 }
 
 export const useChat = () => {
-  const { socket, isConnected } = useSocket();
+  const { isConnected } = useSocket();
   const [messages, setMessages] = useState<Message[]>([]);
   const [userCount, setUserCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Cargar mensajes existentes
+  const loadMessages = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch('/api/socket');
+      const data = await response.json();
+      
+      if (data.messages) {
+        setMessages(data.messages);
+      }
+      if (data.users) {
+        setUserCount(data.users.length);
+      }
+    } catch (error) {
+      console.error('Error cargando mensajes:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    if (!socket) return;
-
-    // Escuchar nuevos mensajes
-    socket.on('newMessage', (message) => {
-      setMessages(prev => [...prev, message]);
-    });
-
-    // Escuchar actualización de usuarios conectados
-    socket.on('userCount', (count) => {
-      setUserCount(count);
-    });
-
-    // Cargar mensajes existentes
-    const loadMessages = async () => {
-      try {
-        const response = await fetch('/api/messages');
-        const data = await response.json();
-        setMessages(data);
-      } catch (error) {
-        console.error('Error cargando mensajes:', error);
-      }
-    };
-
     loadMessages();
-
+    
+    // Recargar mensajes cada 5 segundos para simular tiempo real
+    const interval = setInterval(loadMessages, 5000);
+    
     return () => {
-      socket.off('newMessage');
-      socket.off('userCount');
+      clearInterval(interval);
     };
-  }, [socket]);
+  }, []);
 
-  const sendMessage = (message: string, username: string = 'Usuario') => {
-    if (socket && message.trim()) {
-      socket.emit('sendMessage', {
-        message: message.trim(),
-        username,
-        room: 'global'
+  const sendMessage = async (message: string, username: string = 'Usuario', room: string = 'global') => {
+    if (!message.trim()) return;
+
+    try {
+      const response = await fetch('/api/socket', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: message.trim(),
+          username,
+          room
+        }),
       });
+
+      if (response.ok) {
+        // Recargar mensajes después de enviar
+        await loadMessages();
+      } else {
+        console.error('Error enviando mensaje');
+      }
+    } catch (error) {
+      console.error('Error enviando mensaje:', error);
     }
   };
 
@@ -59,6 +77,8 @@ export const useChat = () => {
     messages,
     userCount,
     sendMessage,
-    isConnected
+    isConnected,
+    isLoading,
+    loadMessages
   };
 };

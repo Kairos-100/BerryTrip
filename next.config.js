@@ -1,24 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
   images: {
-    domains: ['images.unsplash.com', 'via.placeholder.com'],
-    unoptimized: true
+    domains: ['localhost', 'images.unsplash.com'],
   },
-  experimental: {
-    esmExternals: false
+  env: {
+    CUSTOM_KEY: process.env.CUSTOM_KEY,
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-      };
-    }
-    return config;
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'es', 'ko'],
   },
 }
 

@@ -1,32 +1,36 @@
 'use client'
 
 import { MapPin, Shield, Users, Star } from 'lucide-react'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface HeroProps {
   onGetStarted: () => void
+  onViewDemo: () => void
 }
 
-export default function Hero({ onGetStarted }: HeroProps) {
+export default function Hero({ onGetStarted, onViewDemo }: HeroProps) {
+  const { t } = useTranslation()
+  
   const features = [
     {
       icon: MapPin,
-      title: 'Mapa de Seguridad',
-      description: 'Conecta con otras viajeras cerca de ti'
+      title: t('hero.features.map.title'),
+      description: t('hero.features.map.description')
     },
     {
       icon: Shield,
-      title: 'Alojamientos Verificados',
-      description: 'Solo lugares seguros para mujeres'
+      title: t('hero.features.accommodations.title'),
+      description: t('hero.features.accommodations.description')
     },
     {
       icon: Users,
-      title: 'Comunidad Global',
-      description: 'Chat con mujeres de tu destino'
+      title: t('hero.features.community.title'),
+      description: t('hero.features.community.description')
     },
     {
       icon: Star,
-      title: 'Botón de Emergencia',
-      description: 'Contacto directo con policía local'
+      title: t('hero.features.emergency.title'),
+      description: t('hero.features.emergency.description')
     }
   ]
 
@@ -35,14 +39,13 @@ export default function Hero({ onGetStarted }: HeroProps) {
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Viaja <span className="text-berry-600">Segura</span> con
+            {t('hero.title')} <span className="text-berry-600">Segura</span> con
             <br />
             <span className="text-safety-600">BerryTrip</span>
           </h1>
           
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            La primera plataforma diseñada exclusivamente para mujeres que viajan solas. 
-            Conecta, reserva y viaja con total seguridad.
+            {t('hero.subtitle')}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -50,10 +53,13 @@ export default function Hero({ onGetStarted }: HeroProps) {
               onClick={onGetStarted}
               className="berry-gradient text-white px-8 py-4 rounded-xl text-lg font-semibold hover:opacity-90 transition-opacity shadow-lg"
             >
-              Comenzar Ahora
+              {t('hero.getStarted')}
             </button>
-            <button className="border-2 border-berry-600 text-berry-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-berry-50 transition-colors">
-              Ver Demo
+            <button 
+              onClick={onViewDemo}
+              className="border-2 border-berry-600 text-berry-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-berry-50 transition-colors"
+            >
+              {t('hero.viewDemo')}
             </button>
           </div>
 

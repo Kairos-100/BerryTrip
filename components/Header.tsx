@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { MapPin, MessageCircle, Calendar, Shield, Menu, X, User } from 'lucide-react'
+import { useTranslation } from '@/hooks/useTranslation'
+import LanguageSwitcher from './LanguageSwitcher'
 
 interface HeaderProps {
   onLoginClick: () => void
@@ -11,12 +13,13 @@ interface HeaderProps {
 
 export default function Header({ onLoginClick, user, onLogout }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { t } = useTranslation()
 
   const navigation = [
-    { name: 'Mapa de Seguridad', href: '#mapa', icon: MapPin },
-    { name: 'Reservas', href: '#reservas', icon: Calendar },
-    { name: 'Chat', href: '#chat', icon: MessageCircle },
-    { name: 'Emergencia', href: '#emergencia', icon: Shield },
+    { name: t('header.nav.map'), href: '#mapa', icon: MapPin },
+    { name: t('header.nav.bookings'), href: '#reservas', icon: Calendar },
+    { name: t('header.nav.chat'), href: '#chat', icon: MessageCircle },
+    { name: t('header.nav.emergency'), href: '#emergencia', icon: Shield },
   ]
 
   return (
@@ -30,7 +33,7 @@ export default function Header({ onLoginClick, user, onLogout }: HeaderProps) {
                 <span className="text-white font-bold text-lg">B</span>
               </div>
               <span className="ml-2 text-2xl font-bold text-berry-600">
-                BerryTrip
+                {t('header.logo')}
               </span>
             </div>
           </div>
@@ -54,6 +57,8 @@ export default function Header({ onLoginClick, user, onLogout }: HeaderProps) {
 
           {/* User Actions */}
           <div className="flex items-center space-x-4">
+            <LanguageSwitcher />
+            
             {user ? (
               <div className="flex items-center space-x-3">
                 <div className="flex items-center space-x-2">
@@ -68,7 +73,7 @@ export default function Header({ onLoginClick, user, onLogout }: HeaderProps) {
                   onClick={onLogout}
                   className="text-sm text-gray-500 hover:text-gray-700"
                 >
-                  Cerrar Sesión
+                  {t('header.logout')}
                 </button>
               </div>
             ) : (
@@ -76,7 +81,7 @@ export default function Header({ onLoginClick, user, onLogout }: HeaderProps) {
                 onClick={onLoginClick}
                 className="berry-gradient text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity"
               >
-                Iniciar Sesión
+                {t('header.login')}
               </button>
             )}
 

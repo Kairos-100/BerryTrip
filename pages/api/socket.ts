@@ -1,8 +1,10 @@
-// Simulamos una base de datos en memoria (en producción usarías una base de datos real)
-let messages = []
-let users = []
+import { NextApiRequest, NextApiResponse } from 'next'
 
-export default function handler(req, res) {
+// Simulamos una base de datos en memoria (en producción usarías una base de datos real)
+let messages: any[] = []
+let users: any[] = []
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   // Configurar headers CORS
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   res.setHeader('Access-Control-Allow-Origin', '*')

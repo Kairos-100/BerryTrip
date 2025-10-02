@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useSocket } from './useSocket';
 
 interface Location {
   lat: number;
@@ -14,26 +13,9 @@ interface User {
 }
 
 export const useLocation = () => {
-  const { socket } = useSocket();
   const [userLocation, setUserLocation] = useState<Location | null>(null);
   const [nearbyUsers, setNearbyUsers] = useState<User[]>([]);
   const [isLocationEnabled, setIsLocationEnabled] = useState(false);
-
-  useEffect(() => {
-    if (!socket) return;
-
-    // Escuchar actualizaciones de ubicación de otros usuarios
-    socket.on('userLocationUpdate', (userData) => {
-      setNearbyUsers(prev => {
-        const filtered = prev.filter(user => user.id !== userData.id);
-        return [...filtered, userData];
-      });
-    });
-
-    return () => {
-      socket.off('userLocationUpdate');
-    };
-  }, [socket]);
 
   const getCurrentLocation = () => {
     if (!navigator.geolocation) {
@@ -51,14 +33,6 @@ export const useLocation = () => {
         
         setUserLocation(location);
         setIsLocationEnabled(true);
-
-        // Enviar ubicación al servidor
-        if (socket) {
-          socket.emit('updateLocation', {
-            ...location,
-            username: 'Usuario'
-          });
-        }
       },
       (error) => {
         console.error('Error obteniendo ubicación:', error);
@@ -73,12 +47,8 @@ export const useLocation = () => {
   };
 
   const shareLocation = () => {
-    if (userLocation && socket) {
-      socket.emit('updateLocation', {
-        ...userLocation,
-        username: 'Usuario'
-      });
-    }
+    // Simplified - just return the current location
+    return userLocation;
   };
 
   return {

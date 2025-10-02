@@ -1,32 +1,31 @@
 import { useEffect, useState } from 'react';
-import { io, Socket } from 'socket.io-client';
 
 export const useSocket = () => {
-  const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const socketInstance = io(process.env.NODE_ENV === 'production' 
-      ? window.location.origin
-      : 'http://localhost:3000'
-    );
+    // Simulamos conexión para mantener compatibilidad con el componente
+    setIsConnected(true);
+    
+    // En un entorno real, podrías hacer ping al servidor para verificar conectividad
+    const checkConnection = async () => {
+      try {
+        const response = await fetch('/api/socket');
+        setIsConnected(response.ok);
+      } catch (error) {
+        setIsConnected(false);
+      }
+    };
 
-    socketInstance.on('connect', () => {
-      console.log('Conectado al servidor');
-      setIsConnected(true);
-    });
-
-    socketInstance.on('disconnect', () => {
-      console.log('Desconectado del servidor');
-      setIsConnected(false);
-    });
-
-    setSocket(socketInstance);
+    checkConnection();
+    
+    // Verificar conexión cada 30 segundos
+    const interval = setInterval(checkConnection, 30000);
 
     return () => {
-      socketInstance.close();
+      clearInterval(interval);
     };
   }, []);
 
-  return { socket, isConnected };
+  return { socket: null, isConnected };
 };

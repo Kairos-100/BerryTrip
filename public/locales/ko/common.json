@@ -1,0 +1,126 @@
+{
+  "header": {
+    "logo": "BerryTrip",
+    "nav": {
+      "map": "안전 지도",
+      "bookings": "예약",
+      "chat": "채팅",
+      "emergency": "비상"
+    },
+    "login": "로그인",
+    "logout": "로그아웃"
+  },
+  "hero": {
+    "title": "안전하게 여행하세요",
+    "subtitle": "혼자 여행하는 여성을 위해 특별히 설계된 첫 번째 플랫폼입니다. 연결하고, 예약하고, 완전한 안전과 함께 여행하세요.",
+    "getStarted": "시작하기",
+    "viewDemo": "데모 보기",
+    "features": {
+      "map": {
+        "title": "안전 지도",
+        "description": "근처의 다른 여성 여행자들과 연결하세요"
+      },
+      "accommodations": {
+        "title": "검증된 숙소",
+        "description": "여성을 위한 안전한 장소만"
+      },
+      "community": {
+        "title": "글로벌 커뮤니티",
+        "description": "목적지의 여성들과 채팅하세요"
+      },
+      "emergency": {
+        "title": "비상 버튼",
+        "description": "현지 경찰과 직접 연락"
+      }
+    }
+  },
+  "booking": {
+    "title": "서울의 숙소",
+    "subtitle": "서울, 대한민국의 최고의 안전하고 검증된 숙소를 발견하세요. 여성 전용 호스텔부터 럭셔리 호텔까지, 모두 우리 커뮤니티에서 검증되었습니다.",
+    "loginRequired": {
+      "title": "예약하려면 로그인하세요",
+      "description": "검증된 숙소에 접근하려면 등록이 필요합니다"
+    },
+    "search": {
+      "placeholder": "서울에서 검색 (명동, 강남, 홍대...)",
+      "checkIn": "체크인 날짜",
+      "checkOut": "체크아웃 날짜",
+      "search": "검색"
+    },
+    "filters": {
+      "womenOnly": "여성 전용",
+      "verified": "검증됨",
+      "topRated": "최고 평점"
+    },
+    "accommodation": {
+      "verified": "검증됨",
+      "womenOnly": "여성 전용",
+      "perNight": "1박당",
+      "reviews": "리뷰",
+      "viewDetails": "자세히 보기"
+    }
+  },
+  "chat": {
+    "title": "글로벌 커뮤니티",
+    "subtitle": "목적지의 다른 여성 여행자들과 연결하세요. 경험을 공유하고, 안전 팁을 나누며, 실시간으로 새로운 친구를 만드세요.",
+    "status": {
+      "connected": "실시간 연결됨",
+      "disconnected": "연결 끊김"
+    },
+    "loginRequired": {
+      "title": "채팅에 접근하려면 로그인하세요",
+      "description": "다른 여성 여행자들과 대화에 참여하세요"
+    },
+    "availableChats": "사용 가능한 채팅",
+    "country": "국가",
+    "city": "도시",
+    "selectCountry": "국가를 선택하세요",
+    "selectCity": "도시를 선택하세요",
+    "location": {
+      "activate": "위치 활성화",
+      "activated": "위치 활성화됨",
+      "modal": {
+        "title": "위치 활성화",
+        "description": "근처 여성들과 연결하고 안전하게 위치를 공유할 수 있도록 위치 접근을 허용하세요.",
+        "cancel": "취소",
+        "activate": "활성화"
+      }
+    },
+    "chat": {
+      "selectChat": "시작할 채팅을 선택하세요",
+      "womenOnline": "명의 여성이 온라인",
+      "shareLocation": "위치 공유",
+      "typing": "입력 중...",
+      "messagePlaceholder": "메시지를 입력하세요...",
+      "loadingMessages": "메시지 로딩 중..."
+    }
+  },
+  "emergency": {
+    "title": "비상 버튼",
+    "description": "비상시 즉시 현지 당국에 연락하세요"
+  },
+  "auth": {
+    "login": "로그인",
+    "register": "회원가입",
+    "email": "이메일",
+    "password": "비밀번호",
+    "name": "이름",
+    "confirmPassword": "비밀번호 확인",
+    "forgotPassword": "비밀번호를 잊으셨나요?",
+    "noAccount": "계정이 없으신가요?",
+    "hasAccount": "이미 계정이 있으신가요?",
+    "close": "닫기"
+  },
+  "common": {
+    "loading": "로딩 중...",
+    "error": "오류",
+    "success": "성공",
+    "cancel": "취소",
+    "save": "저장",
+    "delete": "삭제",
+    "edit": "편집",
+    "close": "닫기"
+  }
+}
+
+
