@@ -29,22 +29,31 @@ export default function AuthModal({ onClose, onSuccess }: AuthModalProps) {
   const onSubmit = async (data: FormData) => {
     setIsLoading(true)
     
-    // Simulate login API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // Mock user data
-      const user = {
-        id: 1,
-        name: 'Demo User',
-        email: data.email,
-        avatar: null,
-        verified: true
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        // Store token and user data in localStorage
+        localStorage.setItem('berrytrip_token', result.token)
+        localStorage.setItem('berrytrip_user', JSON.stringify(result.user))
+        
+        onSuccess(result.user)
+      } else {
+        // Handle error - you might want to show this to the user
+        console.error('Login error:', result.error)
+        alert(result.error || 'Login failed')
       }
-      
-      onSuccess(user)
     } catch (error) {
       console.error('Login error:', error)
+      alert('Network error. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -53,6 +62,11 @@ export default function AuthModal({ onClose, onSuccess }: AuthModalProps) {
   const handleSignUp = () => {
     onClose()
     router.push('/signup')
+  }
+
+  const handleForgotPassword = () => {
+    onClose()
+    router.push('/forgot-password')
   }
 
   return (
@@ -149,6 +163,7 @@ export default function AuthModal({ onClose, onSuccess }: AuthModalProps) {
             </label>
             <button
               type="button"
+              onClick={handleForgotPassword}
               className="text-sm text-berry-600 hover:text-berry-500 font-medium"
             >
               Forgot password?

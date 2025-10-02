@@ -90,15 +90,37 @@ export default function SignUpPage() {
 
     setIsLoading(true)
     
-    // Simulate API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      // Redirect to home page with success message
-      router.push('/?signup=success')
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.password,
+          location: formData.location,
+          interests: formData.interests,
+        }),
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        // Store token and user data in localStorage
+        localStorage.setItem('berrytrip_token', result.token)
+        localStorage.setItem('berrytrip_user', JSON.stringify(result.user))
+        
+        // Redirect to home page with success message
+        router.push('/?signup=success')
+      } else {
+        setErrors({ general: result.error || 'Something went wrong. Please try again.' })
+      }
     } catch (error) {
       console.error('Signup error:', error)
-      setErrors({ general: 'Something went wrong. Please try again.' })
+      setErrors({ general: 'Network error. Please try again.' })
     } finally {
       setIsLoading(false)
     }
